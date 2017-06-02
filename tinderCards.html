@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style type="text/css">
+
+        #container {
+            width: 500px;
+            margin: auto !important;
+            display: block;
+            height: 500px;
+            position: relative;
+            list-style-type: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .buddy {
+            display: none;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            color: #fff;
+            padding: 20px;
+            width: 360px;
+            height: 360px;
+            top: 50px;
+            left: 50px;
+            position: absolute;
+            cursor: hand;
+        }
+        .rotate-left {
+            transform: rotate(30deg) scale(0.8);
+            transition: 1s;
+            margin-left: 400px;
+            cursor: e-resize;
+            opacity: 0;
+            z-index: 10;
+        }
+        .rotate-right {
+            transform: rotate(-30deg) scale(0.8);
+            transition: 1s;
+            opacity: 0;
+            margin-left: -400px;
+            cursor: w-resize;
+            z-index: 10;
+        }
+        .avatar {
+            background: #222;
+            width: 340px;
+            height: 340px;
+            display: block;
+            margin-top: 10px;
+            margin-left: 10px;
+            background-size: auto 160% !important;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .like {
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: 2px solid green;
+            color: green;
+            text-transform: uppercase;
+            font-size: 15px;
+            position: absolute;
+            top: 50px;
+            right: 40px;
+            text-shadow: none;
+        }
+        .dislike {
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: 2px solid red;
+            color: red;
+            text-transform: uppercase;
+            font-size: 15px;
+            position: absolute;
+            top: 50px;
+            left: 40px;
+            text-shadow: none;
+        }
+        </style>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="buddy" style="display: block;"><div class="avatar"  style="display: block; background-image: url(http://1.bp.blogspot.com/_qEbjiFbQWGM/TCBVlN3mkYI/AAAAAAAADCM/7CjYqUHwbgY/s1600/workshop_modell_0126.jpg)"></div></div>
+            <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://static.stylemagazin.hu/medias/29280/Nem-ehezik-a-Women-of-the-Year-legjobb-modell-dijara-eselyes-szepseg_32fc7c86954a8847610499a0fc7261e2.jpg)"></div></div>
+            <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://w1nd.cc/promo/347.jpg)"></div></div>
+            <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://ell.h-cdn.co/assets/cm/15/01/54a769be3112d_-_elle-rata-insta-1-24375723.png)"></div></div>
+            <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://hircsarda.hu/wp-content/uploads/2016/03/orban1.jpeg)"></div></div>
+        </div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $(".buddy").on("swiperight", function() {
+
+                $(this).addClass('rotate-left').delay(700).fadeOut(1);
+
+                $('.buddy').find('.status').remove();
+
+                $(this).append('<div class="status like">Like!</div>');
+
+                if ( $(this).is(':last-child') ) {
+                    $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+                } else {
+                    $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+                }
+            });
+
+            $(".buddy").on("swipeleft", function() {
+
+                $(this).addClass('rotate-right').delay(700).fadeOut(1);
+
+                $('.buddy').find('.status').remove();
+
+                $(this).append('<div class="status dislike">Dislike!</div>');
+
+                if ( $(this).is(':last-child') ) {
+                    $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+                    alert('OUPS');
+                } else {
+                    $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+                }
+            });
+        });
+        </script>
+    </body>
+</html>
